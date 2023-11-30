@@ -1,0 +1,56 @@
+{% extends 'myapp/home.html' %}
+
+{% block first %}
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Course Page</title>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <style>
+    /* Custom CSS for the highlighted course cards */
+    .course-card {
+      background-color: #f8f9fa;
+      border: none;
+      border-radius: 4px;
+      padding: 20px;
+      margin-bottom: 20px;
+      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s;
+    }
+    .course-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 2px 10px 20px rgba(0, 0, 0, 0.2);
+    }
+    .course-image {
+      height: 150px;
+      width: 200px;
+      object-fit: cover;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container"style="background-image: url(https://t3.ftcdn.net/jpg/01/29/27/68/360_F_129276875_EdiO8jSL1QCl8wtfxA140Sjpf3UeBPYG.jpg);">
+    <B><h1>COURSES LIST</h1></B>
+    <hr>
+    <div class="row">
+      {% for course in courses %}
+      <div class="col-sm-3">
+        <div class="course-card">
+          <a href="{% url 'courses_detail' course.pk %}"><h4>{{ course.cname }}</h4></a>
+          {% if course.image %}
+          <img src="{{ course.image.url }}" alt="Course Image" class="img-fluid course-image ">
+          {% endif %}
+          <p>Trainer: {{ course.ctrainer }}</p>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+
+  <!-- Bootstrap JS -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</body>
+</html>
+{% endblock %}

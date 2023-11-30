@@ -1,0 +1,35 @@
+{% extends 'admin/adminpage.html' %}
+
+{% block first %}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6 mt-5">
+            <div class="card bg-info">
+                <div class="card-body">
+                    <center><h1>Upload Test Document Here</h1></center>
+                    <form method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        {% if messages %}
+                            <ul class="messages">
+                                {% for message in messages %}
+                                    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                                {% endfor %}
+                            </ul>
+                        {% endif %}
+                        <div class="form-group">
+                            <center>
+                                <label for="excel_file">Test Document</label>
+                                <input type="file" class="form-control-file" id="excel_file" name="excel_file">
+                            </center>
+                        </div>
+                        <br>
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-primary">Upload</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

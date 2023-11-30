@@ -1,0 +1,59 @@
+{% extends 'student/studenthome.html' %}
+{% block student %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Attendance</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <h1>Attendance</h1>
+    <a class="btn btn-primary mr-2" href="{% url 'attendance' %}">Attendance</a>&ensp;
+    <a class="btn btn-primary mr-2" href="{% url 'interview_graph' %}">Interview</a>&ensp;
+    <a class="btn btn-primary" href="{% url 'student_test_graph' %}">Test</a>
+
+    <div style="height: 300px; width: 400px;">
+        <canvas id="attendanceChart"></canvas>
+    </div>
+
+    <h2>Attendance List</h2>
+    <form method="GET">
+        <select name="interval">
+            <option value="">All</option>
+            <option value="monthly">Monthly</option>
+            <option value="weekly">Weekly</option>
+        </select>
+        <button type="submit">Filter</button>
+    </form>
+
+    {% for item in attendance %}
+    <h4>No of days </h4>
+    {{ item.present_count }}
+           
+    {% endfor %}
+
+    <script>
+        var attendanceData = {{ attendance_data|safe }};
+        var attendanceLabels = {{ attendance_labels|safe }};
+        var attendanceColors = {{ attendance_colors|safe }};
+
+        var attendanceChart = new Chart(document.getElementById('attendanceChart'), {
+            type: 'pie',
+            data: {
+                labels: attendanceLabels,
+                datasets: [{
+                    data: attendanceData,
+                    backgroundColor: attendanceColors
+                }]
+            },
+            options: {
+                title: {
+                    display: true,
+                    text: 'Attendance Statistics'
+                }
+            }
+        });
+    </script>
+</body>
+</html>
+{% endblock %}

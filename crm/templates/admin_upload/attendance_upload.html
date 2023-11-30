@@ -1,0 +1,24 @@
+{% extends 'admin/adminpage.html' %}
+
+{% block first %}
+<div class="col-8 mx-auto my-5">
+    <div class="card bg-info">
+        <div class="card-body">
+            <center><h1>Upload Attendance here ....🤗💨</h1></center>
+
+            <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="form-group">
+                    <center><label for="attendance_file">Attendance File</label>
+                    <input type="file" class="form-control-file" id="attendance_file" name="attendance_file"></center>
+                </div>
+                <br>
+                <div class="text-center">
+                    <button type="submit" class="btn btn-primary">Upload</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
+

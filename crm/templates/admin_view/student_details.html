@@ -1,0 +1,29 @@
+{% extends 'admin/adminpage.html' %}
+
+{% block first %}
+<div class="container">
+  <div class="row">
+    <center>
+    <div class="col-md-4">
+      <center>
+      <h3>Student: {{ student.user.username }}</h3>
+      <ul class="list-group">
+        <li class="list-group-item">
+          <a class="btn btn-outline-primary" href="{% url 'student_tests' student.id %}">Weekly Tests</a>
+        </li>
+        <li class="list-group-item">
+          <a class="btn btn-outline-primary" href="{% url 'student_interviews' student.id %}">Mock Interviews</a>
+        </li>
+        <li class="list-group-item">
+          <a class="btn btn-outline-primary" href="{% url 'student_attendance' student.id %}">Attendance</a>
+        </li>
+        <li class="list-group-item">
+          <a class="btn btn-outline-primary" href="{% url 'student_resume_view' student.id %}">Resume</a>
+        </li>
+      </ul>
+    </center>
+    </div>
+  </center>
+  </div>
+</div>
+{% endblock %}

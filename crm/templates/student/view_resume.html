@@ -1,0 +1,14 @@
+{% extends 'student/studenthome.html' %}
+{% block student %}
+ <h2>Resume</h2>
+  {% if student.resume %}
+    <a class="btn btn-primary" href="{{ student.resume.url }}" target="_blank">View Resume</a>
+  {% else %}
+    <p>No resume uploaded.</p>
+  {% endif %}
+  <br>
+  <br>
+{% if user.is_authenticated %}
+    <a href="{% url 'update_resume' %}"><h3 class="btn btn-success">Update Your Resume</h3></a>
+{% endif %}
+{% endblock %}

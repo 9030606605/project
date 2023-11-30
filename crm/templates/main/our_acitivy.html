@@ -1,0 +1,93 @@
+{% extends 'myapp/home.html' %}
+{% block search %}
+<form class="d-flex" role="search" method="post" action="{% url 'course_searchurl' %}">
+    {% csrf_token %}
+    <input class="form-control me-2" type="search" name="word" placeholder="Search" aria-label="Search">
+    <button class="btn btn-success" type="submit">Search</button>
+</form>
+{% endblock %}
+{% block first %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <style>
+    .custom-card {
+      height: 100%;
+    }
+  </style>
+</head>
+
+<body>
+
+
+  <div class="container mt-4">
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark justify-content-center">
+            <div class="container text-center">
+              <h1 class="text-light">OUR ACTIVITY</h1>
+            </div>
+          </nav>
+          
+    </header>
+
+    <div class="row row-cols-1 row-cols-md-2 g-4">
+      <div class="col">
+        <div class="card bg-primary custom-card">
+          <img src="https://cdn2.hubspot.net/hubfs/147545/social-suggested-images/MimioClarity_InUse.jpeg" class="card-img-top" alt="Teaching Image">
+          <div class="card-body">
+            <h2 class="card-title text-white">Teaching</h2>
+            <p class="card-text">We provide comprehensive teaching services to our students. Our experienced instructors focus on delivering quality education and ensuring student success.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="card bg-primary custom-card">
+          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTRoP1JGcmj4Ik0tat319VbvaNQuTbIh8448A&usqp=CAU" class="card-img-top" alt="Mock Interviews Image">
+          <div class="card-body">
+            <h2 class="card-title text-white">Mock Interviews</h2>
+            <p class="card-text">We conduct mock interviews to prepare students for job interviews. Our mock interviews help students gain confidence and improve their interview skills.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="card bg-primary custom-card">
+          <img src="https://media.istockphoto.com/id/462641909/photo/students-doing-a-test.jpg?s=612x612&w=0&k=20&c=pSuMq-43G8K9qqT-ltrBRtVX502mWvOZmu2wxtm7zJY=" class="card-img-top" alt="Weekly Tests Image">
+          <div class="card-body">
+            <h2 class="card-title text-white">Weekly Tests</h2>
+            <p class="card-text">Regular weekly tests are conducted to assess the progress of students. These tests help in identifying areas of improvement and enhancing knowledge.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="card bg-primary custom-card">
+          <img src="https://www.imageconsultinginstitute.com/wp-content/uploads/2022/02/soft-skills-training-for-employees-2.jpg" class="card-img-top" alt="Soft Skills Image">
+          <div class="card-body">
+            <h2 class="card-title text-white">Soft Skills</h2>
+            <p class="card-text">Along with technical knowledge, we also focus on developing soft skills in our students. Effective communication, teamwork, and leadership skills are emphasized.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="card bg-primary custom-card">
+          <img src="https://www.shutterstock.com/image-photo/beautiful-girl-working-out-plan-260nw-619032509.jpg" class="card-img-top" alt="Student Projects Image">
+          <div class="card-body">
+            <h2 class="card-title text-white">Student Projects</h2>
+            <p class="card-text">Students are encouraged to work on real-world projects to gain practical experience. We provide guidance and support throughout the project development process.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <footer class="bg-dark text-light text-center py-3 mt-4">
+    <p>&copy; 2023 V Cube. All rights reserved.</p>
+  </footer>
+
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
+
+{% endblock %}

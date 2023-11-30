@@ -1,0 +1,205 @@
+{% extends 'student/studenthome.html' %}
+
+{% block first %}
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <title>Job Form</title>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+            }
+
+            .form-card {
+                border: 1px solid #ccc;
+                border-radius: 5px;
+                padding: 15px;
+                margin: 10px 0;
+                background-color: #f9f9f9;
+            }
+
+            .form-card label {
+                font-weight: bold;
+                display: block;
+                margin-bottom: 5px;
+            }
+
+            .form-card select,
+            .form-card input[type="text"] {
+                width: 100%;
+                padding: 5px;
+                border: 1px solid #ccc;
+                border-radius: 3px;
+            }
+
+            .form-card textarea {
+                width: 100%;
+                padding: 5px;
+                border: 1px solid #ccc;
+                border-radius: 3px;
+                resize: vertical;
+            }
+
+            .mb-2 {
+                margin-bottom: 20px;
+            }
+
+            .card {
+                box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1);
+                padding: 10px;
+                background-color: #fff;
+            }
+
+            .card h2 {
+                margin-bottom: 10px;
+                border-bottom: 2px solid #ccc;
+                padding-bottom: 5px;
+            }
+
+            .btn-primary {
+                background-color: #007bff;
+                color: #fff;
+                padding: 10px 20px;
+                border: none;
+                border-radius: 3px;
+                cursor: pointer;
+            }
+
+            .btn-primary:hover {
+                background-color: #0056b3;
+            }
+
+            /* Adjust alignment */
+            .mb-2 {
+                width: 60%;
+                margin: 20px auto;
+            }
+
+            .card {
+                margin-bottom: 15px;
+            }
+
+            /* Center form elements */
+            .form-card {
+                display: flex;
+                flex-direction: column;
+            }
+
+            .form-card label,
+            .form-card select,
+            .form-card input,
+            .form-card textarea {
+                margin-bottom: 10px;
+            }
+
+            center {
+                margin-top: 20px;
+            }
+
+        </style>
+    </head>
+    <body>
+        {% if show_form %}
+            <!-- Your existing form HTML code here -->
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="mb-2">
+                    <div class="card">
+                        <h2>Personal Details</h2>
+                        <div class="form-card">
+                            <label for="{{ form.current_city.id_for_label }}">Current City:</label>
+                            {{ form.current_city }}
+                        </div>
+    
+                        <div class="form-card">
+                            <label for="{{ form.gender.id_for_label }}">Gender:</label>
+                            {{ form.gender }}
+                        </div>
+    
+                        <div class="form-card">
+                            <label for="{{ form.resume.id_for_label }}">Resume:</label>
+                            {{ form.resume }}
+                        </div>
+                    </div>
+                    <div class="card">
+                        <h2>Academic Details</h2>
+                        <div class="form-card">
+                            <label for="{{ form.degree_college.id_for_label }}">Graduation | Degree College [NAME]:</label>
+                            {{ form.degree_college }}
+                        </div>
+    
+                        <div class="form-card">
+                            <label for="{{ form.passed_out_year.id_for_label }}">Passed Out Year:</label>
+                            {{ form.passed_out_year }}
+                        </div>
+    
+                        <div class="form-card">
+                            <label for="{{ form.percentage.id_for_label }}">Percentage:</label>
+                            {{ form.percentage }}
+                        </div>
+                    </div>
+                    <div class="card">
+                        <h2>Post Graduation Details</h2>
+                        <h6>Leave this if you are not Done PG </h6>
+                        <div class="form-card">
+                            <label for="{{ form.post_graduation.id_for_label }}">Post Graduation [GROUP]:</label>
+                            {{ form.post_graduation }}
+                        </div>
+    
+                        <div class="form-card">
+                            <label for="{{ form.pg_degree_college.id_for_label }}">PG Degree College [NAME]:</label>
+                            {{ form.pg_degree_college }}
+                        </div>
+    
+                        <div class="form-card">
+                            <label for="{{ form.pg_passed_out_year.id_for_label }}">PG Passed Out Year:</label>
+                            {{ form.pg_passed_out_year }}
+                        </div>
+                    </div>
+    
+                    <div class="card">
+                        <h2>Professional Details</h2>
+                        <h6>Leave this if you dont have any Experience </h6>
+                        <div class="form-card">
+                            <label for="{{ form.relevant_experience.id_for_label }}">Relevant Experience:</label>
+                            {{ form.relevant_experience }}
+                        </div>
+    
+                        <div class="form-card">
+                            <label for="{{ form.designation.id_for_label }}">Designation:</label>
+                            {{ form.designation }}
+                        </div>
+    
+                        <div class="form-card">
+                            <label for="{{ form.company_name.id_for_label }}">Company Name:</label>
+                            {{ form.company_name }}
+                        </div>
+    
+                        <div class="form-card">
+                            <label for="{{ form.reporting_person_contact.id_for_label }}">Reporting Person & Contact:</label>
+                            {{ form.reporting_person_contact }}
+                        </div>
+                    </div>
+    
+                    <center><button class="btn btn-primary" type="submit">Submit</button></center>
+                </div>
+            </form>
+        {% else %}
+            <div class="container mt-5">
+                <div class="row">
+                    <div class="col-md-6 offset-md-3">
+                        <div class="card">
+                            <div class="card-body text-center">
+                                <h4>You Need to attend at least Four mock interviews to fill PRF Form and you need to score more than  7.5 marks ..
+                                    Other wise Not Allowed 
+                                </h4>
+                                <a href="{% url 'studenthomeurl' %}" class="btn btn-primary">Go Back</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+    </body>
+    </html>
+{% endblock %}

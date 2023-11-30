@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>V Cube</title>
+    <link rel="icon" href="https://www.vcubesoftsolutions.com/wp-content/uploads/2020/10/V-CUBE-Logo-4-scaled-e1636039304265.jpg" type="image/png" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous" />
+    <style>
+        .course-card {
+            border: 1px solid #ccc;
+            padding: 20px;
+            margin-bottom: 20px;
+            background-color: #f9f9f9;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .course-card h1 {
+            font-size: 24px;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .course-card h2 {
+            font-size: 18px;
+            margin-bottom: 10px;
+            color: #555;
+        }
+
+        .course-card p {
+            margin-bottom: 5px;
+            color: #777;
+        }
+
+        .page-title {
+            font-size: 32px;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+    </style>
+</head>
+
+<body style="background-color:#DBF9FC;">
+    <nav class="navbar navbar-expand-lg bg-body-tertiary-text-light bg-lprimary" data-bs-theme="bg-dark" style="background-color: gold;">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#"><img src="https://www.vcubesoftsolutions.com/wp-content/uploads/2020/10/V-CUBE-Logo-4-scaled-e1636039304265.jpg" alt="" style="width: 20%; height: 10%" /></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Student info
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="{% url 'studenthomeurl' %}">home</a></li>
+                            <li><a class="dropdown-item" href="">profile</a></li>
+                            <!-- <li><a class="dropdown-item" href="{% url 'update_resume' %}">Resume</a></li> -->
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="{% url 'admissionform' %}">Admissionform</a></li>
+                            <li><a class="dropdown-item" href="{% url 'job_form' %}">PRF Form</a></li>
+
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="{% url 'studenthomeurl' %}">Home</a>
+                    </li>
+                </ul>
+                <form class="d-flex" role="search">
+                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
+                    <button class="btn btn-outline-success" type="submit">Search</button>
+                </form>
+                <form action="{% url 'logouturl' %}" method="post">
+                    {% csrf_token %}
+                    <button class="btn btn-outline-success" type="submit" style="margin-left: 20px;">Logout</button>
+                </form>
+            </div>
+        </div>
+    </nav>
+    {% block first %}
+    <div class="container">
+        <h1 class="page-title text-danger">Welcome TO You {{student.user.username}}</h1>
+        <div class="row">
+            <div class="col-4">
+                <div class="course-card">
+                    <center><img src="{{ student.image.url }}" alt="{{ Student.name }}" style="height: 220px;width: 150px; object-fit:contain;"></center>
+                    <center>
+                        <h1 class="text-danger">Name : {{ student.user.username }}</h1>
+                        <h2 class="text-info">Course: {{ student.course }}</h2>
+                        <!-- <p class="text-success">Joining Date: {{ student.joining_date }}</p>
+                        <p class="text-success">Actual Fees: {{ student.actual_fees }}</p>
+                        <p class="text-success">Fees Paid: {{ student.fees_paid }}</p> -->
+                        <!-- <p class="text-success">Balance Fee: {{ student.balance }}</p> -->
+                        <a href="{% url 'change_password' %}"><button class="btn btn-primary">Change Password</button></a>
+                        <!-- Assuming you have a user dashboard template -->
+                        
+                    </center>
+                </div>
+                
+            </div>
+            
+            <div class="col-8">
+                <nav class="navbar navbar-expand-lg bg-body-tertiary-text-light bg-lprimary" data-bs-theme="bg-dark" style="background-color: rgb(107, 185, 213);">
+                    <div class="container-fluid">
+                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'testurl' %}">Weekly Test</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'interviewurl' %}">Mock Interview</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'attadanceurl' %}">Attendance</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'student_dashboard' %}">Performance</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'view_resume' %}">Resume</a>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+                <table class="table table-striped table-dark" >
+                    
+                    <tbody>
+                        {% block student %}
+
+                        {% endblock %}
+                    </tbody>
+                </table>
+            </div>
+            
+        </div>
+    </div>
+    {% endblock %}
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
+</body>
+
+</html>

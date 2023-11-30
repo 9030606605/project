@@ -1,0 +1,36 @@
+{% extends 'superuser/dashboard.html' %}
+
+{% block first %}
+  <h2>Passouts for {{ course.name }}</h2>
+
+  {% if passouts %}
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Image</th>
+          <th>Company</th>
+          <th>Package</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for passout in passouts %}
+          <tr>
+            <td>{{ passout.Name }}</td>
+            <td>
+              {% if passout.P_image %}
+                <img src="{{ passout.P_image.url }}" alt="{{ passout.Name }}" height="50">
+              {% else %}
+                No Image
+              {% endif %}
+            </td>
+            <td>{{ passout.compnay }}</td>
+            <td>{{ passout.package }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  {% else %}
+    <p>No passouts found for this course.</p>
+  {% endif %}
+{% endblock %}

@@ -1,0 +1,27 @@
+{% extends 'admin/adminpage.html' %}
+
+{% block first %}
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <h3>Student: {{ student.user.username }} - Tests</h3>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Test Date</th>
+            <th>Marks</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for test in tests %}
+          <tr>
+            <td>{{ test.test_date }}</td>
+            <td>{{ test.marks }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+{% endblock %}

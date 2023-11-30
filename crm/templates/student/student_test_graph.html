@@ -1,0 +1,77 @@
+{% extends 'student/studenthome.html' %}
+{% block student %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Test Graph</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <a class="btn btn-primary mr-2" href="{% url 'attendance' %}">Attendance</a>&ensp;
+    <a class="btn btn-primary mr-2" href="{% url 'interview_graph' %}">Interview</a>&ensp;
+    <a class="btn btn-primary" href="{% url 'student_test_graph' %}">Test</a>
+    
+    <canvas id="testGraph"></canvas>
+
+    <script>
+        var testData = JSON.parse('{{ test_data|escapejs }}');
+
+        // Extract the labels, marks, and dates from the data
+        var labels = testData.map(function(item) {
+            return 'Test ' + item.num_tests;
+        });
+
+        var marks = testData.map(function(item) {
+            return item.marks;
+        });
+
+        var dates = testData.map(function(item) {
+            return item.test_date;
+        });
+
+        // Create the chart
+        var ctx = document.getElementById('testGraph').getContext('2d');
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Marks',
+                    data: marks,
+                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        max: 100
+                    }
+                },
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Test Attendance and Marks'
+                    },
+                    legend: {
+                        display: false
+                    },
+                    tooltips: {
+                        callbacks: {
+                            label: function(context) {
+                                var dataIndex = context.dataIndex;
+                                var mark = marks[dataIndex];
+                                var date = dates[dataIndex];
+                                return 'Mark: ' + mark + ' - Date: ' + date;
+                            }
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
+{% endblock %}

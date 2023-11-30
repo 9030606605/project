@@ -1,0 +1,16 @@
+{% extends 'student/studenthome.html'%}
+{% block student %}
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <div class="card">
+                <div class="card-body text-center">
+                    <h2>Success!</h2>
+                    <p>Your response has been successfully Recorded.</p>
+                    <a href="{% url 'studenthomeurl' %}" class="btn btn-primary">Go Back</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

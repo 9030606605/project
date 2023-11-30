@@ -1,0 +1,66 @@
+{% extends 'myapp/home.html' %}
+{% block search %}
+<form class="d-flex" role="search" method="post" action="{% url 'course_searchurl' %}">
+    {% csrf_token %}
+    <input class="form-control me-2" type="search" name="word" placeholder="Search" aria-label="Search">
+    <button class="btn btn-success" type="submit">Search</button>
+</form>
+{% endblock %}
+{% block first %}
+<!DOCTYPE html>
+<html lang="en">
+
+<body class="bg-image">
+  <div class="container mt-4">
+    <div class="row">
+      <div class="col-lg-6">
+        <div class="card bg-light p-4">
+          <h1 class="mb-4">Contact Us</h1>
+          <hr>
+          <form>
+            <div class="mb-3">
+              <label for="name" class="form-label">Name</label>
+              <input type="text" class="form-control" id="name" required>
+            </div>
+            <div class="mb-3">
+              <label for="email" class="form-label">Email</label>
+              <input type="email" class="form-control" id="email" required>
+            </div>
+            <div class="mb-3">
+              <label for="message" class="form-label">Message</label>
+              <textarea class="form-control" id="message" rows="5" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </form>
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <div class="card bg-light p-4" style="background-image: url(https://images.unsplash.com/photo-1507608158173-1dcec673a2e5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80);">
+          
+          <h2>About V Cube</h2>
+          <p>V Cube is a leading educational institution that offers a wide range of courses and programs to help students develop their skills and achieve their career goals. Our key features include:</p>
+          <ul class="list-group">
+            <li class="list-group-item">Experienced instructors dedicated to delivering quality education</li>
+            <li class="list-group-item">Mock interviews to enhance interview skills</li>
+            <li class="list-group-item">Regular assessments and weekly tests for progress tracking</li>
+            <li class="list-group-item">Focus on developing soft skills, including communication and teamwork</li>
+            <li class="list-group-item">Real-world projects to gain practical experience</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
+
+<style>
+  .bg-image {
+    background-image: url("https://images.unsplash.com/photo-1533628635777-112b2239b1c7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80");
+    background-size: cover;
+    background-position: center;
+  }
+</style>
+{% endblock %}

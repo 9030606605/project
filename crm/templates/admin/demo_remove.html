@@ -1,0 +1,26 @@
+{% extends 'admin/adminpage.html' %}
+{% block first %}
+    {% for students in res %}
+    <div class="container mt-3" >
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title"> Remove Demo Information</h3>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <p><strong>Name:</strong> {{ students.nstdName }}</p>
+                        <p><strong>Email:</strong> {{ students.nmail }}</p>
+                        <p><strong>Mobile:</strong> {{ students.nmobile }}</p>
+                    </div>
+                    <div class="col-md-6">
+                        <p><strong>Gender:</strong> {{ students.gender }}</p>
+                        <p><strong>Graduation:</strong> {{ students.graduation }}</p>
+                        <p><strong>Course:</strong> {{ students.course.cname }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+{% endblock %}

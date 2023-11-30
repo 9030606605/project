@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Dashboard</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <h1>Welcome to the Student Dashboard</h1>
+
+    <h2>Graphs</h2>
+    <ul>
+        <li><a href="{% url 'attendance' %}">Attendance</a></li>
+        <li><a href="">Interview</a></li>
+        <li><a href="{% url 'student_test_graph' %}">Test</a></li>
+    </ul>
+
+    <div id="attendanceGraphContainer">
+        <h2>Attendance Pie Chart</h2>
+        <div style="height: 300px; width: 400px;">
+            <canvas id="attendanceChart"></canvas>
+        </div>
+    </div>
+
+    <div id="testGraphContainer">
+        <canvas id="testGraph"></canvas>
+    </div>
+
+    <script>
+        // Attendance Pie Chart
+        var attendanceData = {{ attendance_data|safe }};
+        var attendanceLabels = {{ attendance_labels|safe }};
+        var attendanceColors = {{ attendance_colors|safe }};
+
+        var attendanceChart = new Chart(document.getElementById('attendanceChart'), {
+            type: 'pie',
+            data: {
+                labels: attendanceLabels,
+                datasets: [{
+                    data: attendanceData,
+                    backgroundColor: attendanceColors
+                }]
+            },
+            options: {
+                title: {
+                    display: true,
+                    text: 'Attendance Statistics'
+                }
+            }
+        });
+
+        // Test Graph
+        var testData = JSON.parse('{{ test_data|escapejs }}');
+
+        var labels = testData.map(function(item) {
+            return 'Test ' + item.num_tests;
+        });
+
+        var marks = testData.map(function(item) {
+            return item.marks;
+        });
+
+        var dates = testData.map(function(item) {
+            return item.test_date;
+        });
+
+        var ctx = document.getElementById('testGraph').getContext('2d');
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Marks',
+                    data: marks,
+                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        max: 100
+                    }
+                },
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Test Attendance and Marks'
+                    },
+                    legend: {
+                        display: false
+                    },
+                    tooltips: {
+                        callbacks: {
+                            label: function(context) {
+                                var dataIndex = context.dataIndex;
+                                var mark = marks[dataIndex];
+                                var date = dates[dataIndex];
+                                return 'Mark: ' + mark + ' - Date: ' + date;
+                            }
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

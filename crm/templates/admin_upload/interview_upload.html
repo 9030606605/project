@@ -1,0 +1,27 @@
+{% extends 'admin/adminpage.html' %}
+
+{% block first %}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6 mt-5">
+            <div class="card bg-info">
+                <div class="card-body">
+                    <center><h1>Upload Interview Data Here</h1></center>
+                    <form method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <center><label for="interview_file">Interview File</label>
+                            <input type="file" class="form-control-file" id="interview_file" name="interview_file">
+                        </center>
+                        </div>
+                        <br>
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-primary">Upload</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

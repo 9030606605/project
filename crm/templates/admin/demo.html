@@ -1,0 +1,63 @@
+{% extends 'admin/adminpage.html' %}
+
+{% block first %}
+
+
+</head>
+
+<body>
+
+    {% for student in res %}
+        <div class="container mt-3" >
+            <div class="card">
+                <div class="card-header bg-">
+                    <h3 class="card-title ">Demo Information</h3>
+                </div>
+                <div class="card-body bg-info">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <p><strong>Name:</strong> {{ student.Name }}</p>
+                            <p><strong>Email:</strong> {{ student.Email }}</p>
+                            <p><strong>Mobile:</strong> {{ student.Mobile }}</p>
+                        </div>
+                        <div class="col-md-6">
+                            <p><strong>Gender:</strong> {{ student.gender }}</p>
+                            <p><strong>Graduation:</strong> {{ student.graduation }}</p>
+                            <p><strong>Course:</strong> {{ student.course.cname }}</p>
+                        </div>
+                        <div class="row-md-4">
+                            <div style="float: left;">
+                                <form action="{% url 'add_user' %}" method="post">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="record_id" value="{{ student.id }}">
+                                    <button type="submit" class="btn btn-primary">Add</button>
+                                </form>
+                            </div>
+                            <div style="float: right;">
+                                <form action="{% url 'remove_student' student.pk %}" method="post">
+                                    {% csrf_token %}
+                                    <button type="submit" class="btn btn-primary row-sm-6">Remove</button>
+                                </form>
+                            </div>
+                            <center>
+                                <div class="btn-outline-success" style="margin-left: 50px;" >
+                                    <h3>Joined:{{student.status}}</h3>
+                                    
+                                </div>
+                            </center>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+   
+    
+    
+
+
+</body>
+
+</html>
+{% endblock %}

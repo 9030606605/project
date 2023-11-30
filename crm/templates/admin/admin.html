@@ -1,0 +1,17 @@
+{% extends 'admin/adminpage.html' %}
+{% block adminc %}
+<h1 class="alert alert-primary">Admin Panel Courses <a href="{% url 'homeurl' %}"><button class="col-sm-2 btn bg-body-tertiary-text-light alert alert-success">EN-ROLL</button></a> </h1>
+<ul>
+    {% for course in course_list %}
+        <li>
+            <h5 class="col-sm-4 alert alert-primary"><a href="{% url 'courseurl' course.cid %}">{{ course.cname }}</a></h5>
+        </li>
+    {% empty %}
+        <li>No courses found.</li>
+    {% endfor %}
+</ul>
+
+{% block student_list %}
+
+{% endblock %} 
+{% endblock %}

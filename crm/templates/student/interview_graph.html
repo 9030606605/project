@@ -1,0 +1,110 @@
+{% extends 'student/studenthome.html' %}
+
+{% block student %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Interview Graph</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <a class="btn btn-primary mr-2" href="{% url 'attendance' %}">Attendance</a>&ensp;
+    <a class="btn btn-primary mr-2" href="{% url 'interview_graph' %}">Interview</a>&ensp;
+    <a class="btn btn-primary" href="{% url 'student_test_graph' %}">Test</a>
+    
+    <canvas id="interviewGraph"></canvas>
+    <div>
+        <h2>Interview with Maximum Marks</h2>
+        {% if max_marks_interview %}
+            <p>Interview ID: {{ max_marks_interview.interview_id }}</p>
+            <p>Date: {{ max_marks_interview.date }}</p>
+            <p>Performance: {{ max_marks_interview.performance }}</p>
+            <p>Marks: {{ max_marks_interview.marks }}</p>
+        {% else %}
+            <p>No interviews found.</p>
+        {% endif %}
+    </div>
+
+    <div>
+        <h2>Interview with Maximum Marks</h2>
+        {% if max_marks_interview %}
+            <p>Interview ID: {{ max_marks_interview.interview_id }}</p>
+            <p>Date: {{ max_marks_interview.date }}</p>
+            <p>Performance: {{ max_marks_interview.performance }}</p>
+            <p>Marks: {{ max_marks_interview.marks }}</p>
+        {% else %}
+            <p>No interviews found.</p>
+        {% endif %}
+    </div>
+
+    <script>
+        var interviewData = JSON.parse('{{ interview_data|escapejs }}');
+
+        // Convert performance values to numeric format
+        var performances = interviewData.map(function(item) {
+            // Assuming performance values are numeric, if not, convert them to numeric format
+            return parseFloat(item.performance);
+        });
+
+        // Count the occurrences of each performance category
+        var performanceCounts = performances.reduce(function(counts, performance) {
+            counts[performance] = (counts[performance] || 0) + 1;
+            return counts;
+        }, {});
+
+        var performanceLabels = Object.keys(performanceCounts);
+        var performanceData = Object.values(performanceCounts);
+
+        // Extract the labels and marks from the data
+        var labels = interviewData.map(function(item) {
+            return 'Interview ' + item.interview_id;
+        });
+
+        var marks = interviewData.map(function(item) {
+            return item.marks;
+        });
+
+        // Create the chart
+        var ctx = document.getElementById('interviewGraph').getContext('2d');
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: labels,
+                datasets: [
+                    {
+                        label: 'Performance',
+                        data: performanceData,
+                        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        borderWidth: 1
+                    },
+                    {
+                        label: 'Marks',
+                        data: marks,
+                        backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                        borderColor: 'rgba(255, 99, 132, 1)',
+                        borderWidth: 1
+                    }
+                ]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                },
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Interview Performance and Marks'
+                    },
+                    legend: {
+                        display: true
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
+{% endblock %}

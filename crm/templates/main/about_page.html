@@ -1,0 +1,172 @@
+{% extends 'myapp/home.html' %}
+{% block search %}
+<form class="d-flex" role="search" method="post" action="{% url 'course_searchurl' %}">
+    {% csrf_token %}
+    <input class="form-control me-2" type="search" name="word" placeholder="Search" aria-label="Search">
+    <button class="btn btn-success" type="submit">Search</button>
+</form>
+{% endblock %}
+{% block first %}
+<div class="container">
+    <div class="row">
+      <div class="col-lg-8 offset-lg-2">
+        <h1 class="mt-5">About Us</h1>
+        <p><h4>At VCube Soft Solutions,</h4> we are dedicated to equipping students with the skills and knowledge they need to thrive in the software field. Our institute serves as a comprehensive learning platform, offering a wide range of courses and resources designed to empower aspiring software professionals.</p>
+        
+        <h2 class="mt-5">OUR SERVICES</h2>
+        <ul>
+          <li>CLASSROOM TRAINING</li>
+          <li>COOPERATING TRAINING</li>
+          <li>ONLINE TRAINING</li>
+        </ul>
+        
+        <h2 class="mt-5">Courses</h2>
+        <div class="row">   
+          <div class="col-md-6">
+            <div class="card mb-4">
+              <div class="card-body bg-info">
+                <h5 class="card-title">Python Programming</h5>
+                <p class="card-text">Learn Python programming language from beginner to advanced level.</p>
+                <a href="{% url 'homeurl' %}" class="btn btn-primary">Enroll Now</a>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="card mb-4">
+              <div class="card-body bg-info">
+                <h5 class="card-title">Java Programming</h5>
+                <p class="card-text">Master Java programming and develop enterprise-level applications.</p>
+                <a href="{% url 'homeurl' %}" class="btn btn-primary">Enroll Now</a>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="card mb-4">
+              <div class="card-body bg-info">
+                <h5 class="card-title">AWS Certification</h5>
+                <p class="card-text">Prepare for AWS certification and become a cloud expert.</p>
+                <a href="{% url 'homeurl' %}" class="btn btn-primary">Enroll Now</a>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="card mb-4">
+              <div class="card-body bg-info">
+                <h5 class="card-title">Software Testing</h5>
+                <p class="card-text">Learn various testing techniques and ensure software quality.</p>
+                <a href="{% url 'homeurl' %}" class="btn btn-primary">Enroll Now</a>
+              </div>
+            </div>
+          </div>
+          <div class="col-12">
+            <center><h3 class="bg-warning"><a href="{% url 'course_pageurl' %}" style="text-decoration:none">View More</a></h3></center>
+          </div>
+          <br>
+          <br>
+            <!-- Add Collaboration Card -->
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container">
+  <div class="row">
+          <div class="col-12"><center><h3 class="bg-primary">Our Collaboration</h3></center></div>
+          <div class="col-md-4">
+            <div class="card mb-4">
+              <div class="card-body bg-white">
+                <h5 class="card-title">Accenture</h5>
+                <div class="row align-items-center">
+                  <div class="col-md-4">
+                    <img src="https://www.vcubesoftsolutions.com/wp-content/uploads/2021/11/Accenture-logo-1-removebg-preview.png" alt="Company Logo" class="img-fluid">
+                  </div>
+                  <div class="col-md-8">
+                    <p class="card-text">Accenture is a global professional services company providing consulting, technology, and outsourcing solutions to a wide range of industries.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="card mb-4">
+              <div class="card-body bg-white">
+                <h5 class="card-title">ING VYSYA BANk</h5>
+                <div class="row align-items-center">
+                  <div class="col-md-4">
+                    <img src="https://www.vcubesoftsolutions.com/wp-content/uploads/2021/11/5b01f94486c82bb7d2c72d29fe63d4e9-removebg-preview.png" alt="Company Logo" class="img-fluid">
+                  </div>
+                  <div class="col-md-8">
+                    <p class="card-text">ING VYSYA BANK: A prominent Indian bank offering a wide range of financial services with a focus on customer-centric solutions.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="card mb-4">
+              <div class="card-body bg-white">
+                <h5 class="card-title">HCL</h5>
+                <div class="row align-items-center">
+                  <div class="col-md-4">
+                    <img src="https://www.vcubesoftsolutions.com/wp-content/uploads/2021/11/HCL-Logo-removebg-preview.png" alt="Company Logo" class="img-fluid">
+                  </div>
+                  <div class="col-md-8">
+                    <p class="card-text">HCl, or hydrochloric acid, is a strong acid commonly found in the stomach, aiding in digestion processes.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="card mb-4">
+              <div class="card-body bg-white">
+                <h5 class="card-title">Liquidhub</h5>
+                <div class="row align-items-center">
+                  <div class="col-md-4">
+                    <img src="https://www.vcubesoftsolutions.com/wp-content/uploads/2021/11/https___i.forbesimg.com_media_lists_companies_liquidhub_416x416-removebg-preview.png" alt="Company Logo" class="img-fluid">
+                  </div>
+                  <div class="col-md-8">
+                    <p class="card-text">Liquidhub is a technology consulting company specializing in digital transformation, customer experience, and data analytics solutions.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="card mb-4">
+              <div class="card-body bg-white">
+                <h5 class="card-title">AT&T</h5>
+                <div class="row align-items-center">
+                  <div class="col-md-4">
+                    <img src="https://www.vcubesoftsolutions.com/wp-content/uploads/2021/11/download__1_-removebg-preview.png" alt="Company Logo" class="img-fluid">
+                  </div>
+                  <div class="col-md-8">
+                    <p class="card-text">AT&T is a multinational telecommunications company providing mobile, internet, and television services to customers worldwide.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="card mb-4">
+              <div class="card-body bg-white">
+                <h5 class="card-title">Alliance</h5>
+                <div class="row align-items-center">
+                  <div class="col-md-4">
+                    <img src="https://www.vcubesoftsolutions.com/wp-content/uploads/2021/11/b62d6e4884b972479f1fde4396cb768f-removebg-preview.png" alt="Company Logo" class="img-fluid">
+                  </div>
+                  <div class="col-md-8">
+                    <p class="card-text">"Alliance is a leading technology company specializing in software development, IT consulting, and innovative solutions for businesses."</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

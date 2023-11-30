@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>V cube</title>
+    <!-- Include Chart.js library -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="icon" href="https://www.vcubesoftsolutions.com/wp-content/uploads/2020/10/V-CUBE-Logo-4-scaled-e1636039304265.jpg" type="image/png" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous" />
+    <style>
+        /* Add any necessary styles for your graph container */
+        .graph-container {
+            display: flex;
+            flex-direction: row;
+        }
+        
+        .data-container {
+            flex: 1;
+            padding: 10px;
+        }
+        
+        /* Add any additional styles as needed */
+    </style>
+</head>
+
+<body style="background-color:#DBF9FC;">
+    <nav class="navbar navbar-expand-lg navbar-dark " style="background-color: gold;">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <img src="https://www.vcubesoftsolutions.com/wp-content/uploads/2020/10/V-CUBE-Logo-4-scaled-e1636039304265.jpg"
+                    alt="Logo" class="img-fluid" style="max-width: 100px; height: auto;">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle text-black" href="#" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            View Port
+                        </a>
+                        <ul class="dropdown-menu " aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="{% url 'dashboard' %}">Dashboard</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="{% url 'pcourse' %}">Recently Placed</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                <form action="{% url 'logouturl' %}" method="post">
+                    {% csrf_token %}
+                    <button class="btn btn-outline-light" type="submit">Logout</button>
+                </form>
+            </div>
+        </div>
+    </nav>
+    {% block first %}
+    <div class="container">
+        <div class="row mt-4">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h2 class="card-title">Welcome,{{ user.username }} 🤗</h2>
+                        <p class="card-text">You can view the statistics and graphs here.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-4">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <!-- Add the canvas element for the graph -->
+                        <canvas id="graphCanvas"></canvas>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h2>New Students:</h2>
+                        <p>Total Count: {{ new_students_count }}</p>
+                        <h2>Removed Students:</h2>
+                        <p>Total Count: {{ removed_students_count }}</p>
+                        <h2>Demo Students:</h2>
+                        <p>Total Count: {{ demo_count }}</p>
+                        <h2>Current Date:</h2>
+                        <p>{{ current_date }}</p>
+                        <!-- <button class="btn btn-primary" onclick="groupData('year')">Group by Year</button>
+                        <button class="btn btn-primary" onclick="groupData('month')">Group by Month</button>
+                        <button class="btn btn-primary" onclick="groupData('week')">Group by Week</button>
+                        <button class="btn btn-primary" onclick="groupData('day')">Group by Day</button> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        var newStudentsCount = {{ new_students_count }};
+        var removedStudentsCount = {{ removed_students_count }};
+        var demoCount = {{ demo_count }};
+
+        var ctx = document.getElementById('graphCanvas').getContext('2d');
+        var chart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['New Students', 'Removed Students', 'Demo Students'],
+                datasets: [{
+                    label: 'Student Counts',
+                    data: [newStudentsCount, removedStudentsCount, demoCount],
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.5)',
+                        'rgba(54, 162, 235, 0.5)',
+                        'rgba(75, 192, 192, 0.5)'
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(75, 192, 192, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero:true
+                    }
+                }
+            }
+        });
+
+        function groupData(groupBy) {
+            var data = [];
+            var labels = [];
+
+            // Get the current date
+            var currentDate = new Date();
+
+            // Iterate over each model's count and group the data
+            if (groupBy === 'year') {
+                for (var i = currentDate.getFullYear(); i >= 2021; i--) {
+                    labels.push(i.toString());
+                    data.push({
+                        'New Students': getGroupedCountByYear('Newstudent', i),
+                        'Removed Students': getGroupedCountByYear('RemovedStudents', i),
+                        'Demo Students': getGroupedCountByYear('Demo', i)
+                    });
+                }
+            } else if (groupBy === 'month') {
+                for (var i = 11; i >= 0; i--) {
+                    var month = currentDate.getMonth() - i;
+                    var year = currentDate.getFullYear();
+                    if (month < 0) {
+                        month += 12;
+                        year--;
+                    }
+                    labels.push(month.toString() + '/' + year.toString());
+                    data.push({
+                        'New Students': getGroupedCountByMonth('Newstudent', month, year),
+                        'Removed Students': getGroupedCountByMonth('RemovedStudents', month, year),
+                        'Demo Students': getGroupedCountByMonth('Demo', month, year)
+                    });
+                }
+            }
+
+            chart.data.labels = labels;
+            chart.data.datasets[0].data = data;
+            chart.update();
+        }
+
+        function getGroupedCountByYear(model, year) {
+            return 0; // Replace this with your implementation
+        }
+
+        function getGroupedCountByMonth(model, month, year) {
+            return 0; // Replace this with your implementation
+        }
+
+        function getGroupedCountByWeek(model, startDate, endDate) {
+            return 0; // Replace this with your implementation
+        }
+
+        function getGroupedCountByDay(model, date) {
+            return 0; // Replace this with your implementation
+        }
+    </script>
+    {% endblock %}
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
+</body>
+
+</html>

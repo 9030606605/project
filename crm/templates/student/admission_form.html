@@ -1,0 +1,283 @@
+{% extends 'student/studenthome.html' %}
+{% block first %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Form</title>
+    <!-- Add Bootstrap CSS link -->
+    <!-- Add your custom CSS styles if needed -->
+</head>
+<body>
+    <div class="container">
+        <h1 class=""style="width:500px; margin-left: 300px;">Admission Form</h1>
+        <form method="post" enctype="multipart/form-data" action="{% url 'admissionform' %}">
+            {% csrf_token %}
+                    {% for message in messages %}
+                        <div class="alert alert-{{ message.tags }}">
+                        {{ message }}
+                        </div>
+                    {% endfor %}
+            <div class=" card mb-3 mt-4 " style="width: 500px; margin-left: 300px;">
+                <div class="card-body">
+                        <!-- Email Field -->
+                        <div class="card mb-3">
+                            <div class="card-body">
+                                <div class="form-group">
+                                    <label for="{{ form.Email.id_for_label }}">Email:</label>
+                                    <span class="blank">{{ form.Email }}</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Name Field -->
+                        <div class="card mb-3">
+                            <div class="card-body">
+                                <label for="{{ form.Name.id_for_label }}">Name:</label>
+                                {{ form.Name }}
+                            </div>
+                        </div>
+
+                        <!-- Mobile Field -->
+                        <div class="card mb-3">
+                            <div class="card-body">
+                                <label for="{{ form.Mobile.id_for_label }}">Mobile:</label>
+                                {{ form.Mobile }}
+                            </div>
+                        </div>
+
+                        <!-- Alternate Mobile Field -->
+                        <div class="card mb-3">
+                            <div class="card-body">
+                                <label for="{{ form.Alternate_Mobile.id_for_label }}">Alternate Mobile:</label>
+                                {{ form.Alternate_Mobile }}
+                            </div>
+                        </div>
+                        <!-- Course Field -->
+                        <div class="card mb-3">
+                            <div class="card-body">
+                                <label for="{{ form.course.id_for_label }}">Course:</label>
+                                {{ form.course }}
+                            </div>
+                        </div>
+
+                        <!-- Trainer Field -->
+                        <div class="card mb-3">
+                            <div class="card-body">
+                                <label for="{{ form.Tranier.id_for_label }}">Trainer:</label>
+                                {{ form.Tranier }}
+                            </div>
+                        </div>
+
+                        <!-- Mode of Training Field -->
+                        <div class="card mb-3">
+                            <div class="card-body">
+                                <label for="{{ form.Mode_of_Traning.id_for_label }}">Mode of Training:</label>
+                                {{ form.Mode_of_Traning }}
+                            </div>
+                        </div>
+
+                        <!-- Batch Timings Field -->
+                        <div class="card mb-3">
+                            <div class="card-body">
+                                <label for="{{ form.Batch_timings.id_for_label }}">Batch Timings:</label>
+                                {{ form.Batch_timings }}
+                            </div>
+                        </div>
+
+                        <!-- Date of Joining Field -->
+                        <div class="card mb-3">
+                            <div class="card-body">
+                                <label for="{{ form.DateOfjoining.id_for_label }}">Date of Joining:</label>
+                                {{ form.DateOfjoining }}
+                            </div>
+                        </div>
+
+                        <!-- Batch Number Field -->
+                        <div class="card mb-3">
+                            <div class="card-body">
+                                <label for="{{ form.Batch_Number.id_for_label }}">Batch Number:</label>
+                                {{ form.Batch_Number }}
+                            </div>
+                        </div>
+
+                        <!-- Qualification Field -->
+                        <div class="card mb-3">
+                            <div class="card-body">
+                                <label for="{{ form.Qulification.id_for_label }}">Qualification:</label>
+                                {{ form.Qulification }}
+                            </div>
+                        </div>
+
+                        <!-- Work Experience Field -->
+                        <div class="card mb-3">
+                            <div class="card-body">
+                                <label for="{{ form.Work_experience.id_for_label }}">Work Experience:</label>
+                                {{ form.Work_experience }}
+                            </div>
+                        </div>
+
+                        <!-- Experience or Fresher Field -->
+                        <div class="card mb-3">
+                            <div class="card-body">
+                                <label for="{{ form.Experience_or_Fresher.id_for_label }}">Experience or Fresher:</label>
+                                {{ form.Experience_or_Fresher }}
+                            </div>
+                        </div>
+
+                        <!-- Backlogs Field -->
+                        <div class="card mb-3">
+                            <div class="card-body">
+                                <label for="{{ form.Backlogs.id_for_label }}">Backlogs:</label>
+                                {{ form.Backlogs }}
+                            </div>
+                        </div>
+
+                        <!-- Linked Field -->
+                        <div class="card mb-3">
+                            <div class="card-body">
+                                <label for="{{ form.Linked.id_for_label }}">Linked:</label>
+                                {{ form.Linked }}
+                            </div>
+                        </div>
+
+                        <!-- Instagram Field -->
+                        <div class="card mb-3">
+                            <div class="card-body">
+                                <label for="{{ form.Instagram.id_for_label }}">Instagram:</label>
+                                {{ form.Instagram }}
+                            </div>
+                        </div>
+
+                        <!-- Image Field -->
+                        <div class="card mb-3">
+                            <div class="card-body">
+                                <label for="{{ form.Image.id_for_label }}">Image:</label>
+                                {{ form.Image }}
+                            </div>
+                        </div>
+                </div>
+            </div>
+
+            <div class="card  mb-2 mt-2 bg-primary " style="width: 500px; margin-left: 300px;">
+                <div class="card-body">
+                    <h5 class="card-title">Questions</h5>
+                        <!-- Course Interest Field -->
+                        <div class="card mb-3">
+                            <div class="card-body">
+                                <label for="course_interest">1. Why are you interested in this particular course?</label><br>
+                                {% for value, name in form.course_interest.field.choices %}
+                                    {% if value %}
+                                        <div class="form-check">
+                                            <input type="radio" class="form-check-input" id="{{ value }}" name="course_interest" value="{{ value }}">
+                                            <label class="form-check-label" for="{{ value }}">{{ name }}</label>
+                                        </div>
+                                    {% endif %}
+                                {% endfor %}
+                            </div>
+                        </div>
+
+                        <!-- V Cube Reason Field -->
+                        <div class="card mb-3">
+                            <div class="card-body">
+                                <label for="v_cube_reason">2. Why VCube?</label><br>
+                                {% for value, name in form.v_cube_reason.field.choices %}
+                                    {% if value %}
+                                        <div class="form-check">
+                                            <input type="radio" class="form-check-input" id="{{ value }}" name="v_cube_reason" value="{{ value }}">
+                                            <label class="form-check-label" for="{{ value }}">{{ name }}</label>
+                                        </div>
+                                    {% endif %}
+                                {% endfor %}
+                            </div>
+                        </div>
+
+                        <!-- Expectations Field -->
+                        <div class="card mb-3">
+                            <div class="card-body">
+                                <label for="expectations">3. What are you expecting from VCube?</label><br>
+                                {% for value, name in form.expectations.field.choices %}
+                                    {% if value %}
+                                        <div class="form-check">
+                                            <input type="radio" class="form-check-input" id="{{ value }}" name="expectations" value="{{ value }}">
+                                            <label class="form-check-label" for="{{ value }}">{{ name }}</label>
+                                        </div>
+                                    {% endif %}
+                                {% endfor %}
+                            </div>
+                        </div>
+
+                        <!-- Weakness Field -->
+                        <div class="card mb-3">
+                            <div class="card-body">
+                                <label for="weakness">4. What is your biggest weakness?</label><br>
+                                {% for value, name in form.weakness.field.choices %}
+                                    {% if value %}
+                                        <div class="form-check">
+                                            <input type="radio" class="form-check-input" id="{{ value }}" name="weakness" value="{{ value }}">
+                                            <label class="form-check-label" for="{{ value }}">{{ name }}</label>
+                                        </div>
+                                    {% endif %}
+                                {% endfor %}
+                            </div>
+                        </div>
+
+                        <!-- Test Importance Field -->
+                        <div class="card mb-3">
+                            <div class="card-body">
+                                <label for="test_importance">5. Does a weekly test help you to recap the subject?</label><br>
+                                {% for value, name in form.test_importance.field.choices %}
+                                    {% if value %}
+                                        <div class="form-check">
+                                            <input type="radio" class="form-check-input" id="{{ value }}" name="test_importance" value="{{ value }}">
+                                            <label class="form-check-label" for="{{ value }}">{{ name }}</label>
+                                        </div>
+                                    {% endif %}
+                                {% endfor %}
+                            </div>
+                        </div>
+
+                        <!-- Mock Value Field -->
+                        <div class="card mb-3">
+                            <div class="card-body">
+                                <label for="mock_value">6. Are mock and soft skills classes helpful for facing interviews?</label><br>
+                                {% for value, name in form.mock_value.field.choices %}
+                                    {% if value %}
+                                        <div class="form-check">
+                                            <input type="radio" class="form-check-input" id="{{ value }}" name="mock_value" value="{{ value }}">
+                                            <label class="form-check-label" for="{{ value }}">{{ name }}</label>
+                                        </div>
+                                    {% endif %}
+                                {% endfor %}
+                            </div>
+                        </div>
+
+                        <!-- Hear About Us Field -->
+                        <div class="card mb-3">
+                            <div class="card-body">
+                                <label for="hear_about_us">7. How did you hear about us?</label><br>
+                                {% for value, name in form.hear_about_us.field.choices %}
+                                    {% if value %}
+                                        <div class="form-check">
+                                            <input type="radio" class="form-check-input" id="{{ value }}" name="hear_about_us" value="{{ value }}">
+                                            <label class="form-check-label" for="{{ value }}">{{ name }}</label>
+                                        </div>
+                                    {% endif %}
+                                {% endfor %}
+                            </div>
+                        </div>
+
+                        
+                </div>
+            </div>
+            <div class="text-center mt-3">
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+        </form>
+    </div>
+
+    <!-- Add Bootstrap JS link and other scripts if needed -->
+</body>
+</html>
+{% endblock %}

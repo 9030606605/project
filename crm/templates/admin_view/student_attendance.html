@@ -1,0 +1,27 @@
+{% extends 'admin/adminpage.html' %}
+
+{% block first %}
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <h3>Student: {{ student.user.username }} - Attendance</h3>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Present</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for attendance in attendance %}
+          <tr>
+            <td>{{ attendance.date }}</td>
+            <td>{{ attendance.present }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+{% endblock %}
